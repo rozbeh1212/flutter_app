@@ -7,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  void asnwer () {
+  void answer () {
     print('Hello World');
   }
   @override
@@ -20,18 +20,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter Demo'),
+          title: Text(question[0]),
         ),
         body: Column(
           children: [
             RaisedButton(
               child:Text('an2'),
-            onPressed: null,
+            onPressed:() =>  print('Hello World')
+            
             ),
             
             RaisedButton(
-              child:Text('an2'),
-            onPressed: null,
+              child:Text(question[1]),
+            onPressed:() =>  print('Hello World')
             ),
             
           ],
