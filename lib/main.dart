@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -14,8 +16,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // _MyAppState means that this class is private
   var questionIndex = 0;
-  
+
   void answerQuestion() {
     setState(() {
       questionIndex = questionIndex + 1;
@@ -37,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             RaisedButton(
-                child: Text('an2'), onPressed: () => print('Hello World')),
+                child: Question('an2'), onPressed: () => print('Hello World')),
             RaisedButton(
                 child: Text(question[questionIndex]),
                 onPressed: () => print('Hello World')),
