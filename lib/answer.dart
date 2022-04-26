@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 
 class Answer  extends StatelessWidget {
-final Function selectHandler;
+//final Function selectHandler;
 final String answerText;
 
-//final VoidCallback selectHandler; 
+final VoidCallback selectHandler; 
 
-  Answer(this.selectHandler,  this.answerText); 
+  Answer(this.selectHandler,this.answerText); 
   @override
   Widget build(BuildContext context) {
     return Container(
