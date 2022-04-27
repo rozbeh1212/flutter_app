@@ -1,85 +1,73 @@
-// ignore_for_file: prefer_const_constructors, deprecated_member_use
-
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
+// void main() {
+//   runApp(MyApp());
+// }
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
+    // TODO: implement createState
     return _MyAppState();
   }
 }
 
 class _MyAppState extends State<MyApp> {
-  // _MyAppState means that this class is private
-  var questionIndex = 0;
-  var questions = [
+  final _questions = const [
     {
       'questionText': 'What\'s your favorite color?',
-      'answers': [
-        {'text': 'Black', 'score': 10},
-        {'text': 'Red', 'score': 5},
-        {'text': 'Green', 'score': 3},
-        {'text': 'White', 'score': 1},
-      ],
+      'answers': ['Black', 'Red', 'Green', 'White'],
     },
     {
       'questionText': 'What\'s your favorite animal?',
-      'answers': [
-        {'text': 'Rabbit', 'score': 10},
-        {'text': 'Snake', 'score': 5},
-        {'text': 'Elephant', 'score': 3},
-        {'text': 'Lion', 'score': 1},
-      ],
+      'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
     },
     {
-      'questionText': 'What\'s your favorite food?',
-      'answers': [
-        {'text': 'Steak', 'score': 10},
-        {'text': 'Pizza', 'score': 5},
-        {'text': 'Pasta', 'score': 3},
-        {'text': 'Sushi', 'score': 1},
-      ],
-    }
+      'questionText': 'Who\'s your favorite instructor?',
+      'answers': ['Max', 'Max', 'Max', 'Max'],
+    },
   ];
+  var _questionIndex = 0;
 
-  void answerQuestion() {
-    // this method is called when the answer button is pressed and it changes the questionIndex to the next question in the list of questions and then rebuilds the widget tree
-
-    if (questionIndex < questions.length - 1) { // if the questionIndex is less than the length of the questions array minus 1 then it will increment the questionIndex by 1 
-      questionIndex++;
-    } else {
-      questionIndex = 0;
-    }
+  void _answerQuestion() {
+    // var aBool = true;
+    // aBool = false;
 
     setState(() {
-      questionIndex = questionIndex + 1;
+      _questionIndex = _questionIndex + 1;
     });
-    print(questionIndex);
+    print(_questionIndex);
+    if (_questionIndex < _questions.length) {
+      print('We have more questions!');
+    } else {
+      print('No more questions!');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    // var dummy = const ['Hello'];
+    // dummy.add('Max');
+    // print(dummy);
+    // dummy = [];
+    // questions = []; // does not work if questions is a const
+
     return MaterialApp(
       home: Scaffold(
-        body: Column(
-          children: [
-            Question(questions[questionIndex]['questionText']
-                as String), // this is a string literal so we need to cast it to string
-            ...(questions[questionIndex]['answers'] as List<
-                    String>) //... means that we are going to add all the answers to the list of children of the column widget
-                .map((answer) {
-              return Answer(answerQuestion,
-                  answer); // return a new Answer widget with the answerQuestion function and the answer as a parameter
-            }).toList()
-          ],
+        appBar: AppBar(
+          title: Text('My First App'),
         ),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              )
+            : Result(),
       ),
     );
   }
